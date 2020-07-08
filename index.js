@@ -5,7 +5,7 @@ const errorMessages = {
     INCORRECT_DETAILS: 'Incorrect details have been entered' 
 };
 
-const generateErrorPage = message => { title: 'Error page', message };
+const generateErrorPage = message => ({ title: 'Error page', message });
 
 
 const stateProcessors = {
@@ -15,10 +15,9 @@ const stateProcessors = {
             return generateErrorPage(null);
         }
         if (errorMessages[errorCode]) {
-            return generateErrorPage(null);
-            return { title: 'Error page', message: errorMessages[errorCode] };
+            return generateErrorPage(errorMessages[errorCode]);
         }
-        return { title: 'Error page', message: 'Unknown error code' };
+        return generateErrorPage('Unknown error code');
     },
     processing: async (state) => {
         await sleep(2000);
@@ -48,28 +47,25 @@ getProcessingPage([{state: 'processing'}, {state: 'error'}])
     .then(console.log);
 
 /*
+console.log('Processing and then success');
+getProcessingPage([{state: 'processing'}, {state: 'success'}])
+    .then(console.log);
+
 console.log('Processing and then error with no stock');
 getProcessingPage([
     {state: 'processing'},
     {state: 'error', errorCode: 'NO_STOCK'}
-])
-    .then(console.log);
-*/
+]).then(console.log);
 
-/*
 console.log('Processing and then error with incorrect details');
 getProcessingPage([
     {state: 'processing'},
     {state: 'error', errorCode: 'INCORRECT_DETAILS'}
-])
-    .then(console.log);
-*/
+]).then(console.log);
 
-/*
 console.log('Invalid state');
 getProcessingPage([
     {state: 'processing'},
     {state: 'some_dodgy_state'}
-])
-    .then(console.log);
+]).then(console.log);
 */
