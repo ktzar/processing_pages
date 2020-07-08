@@ -4,3 +4,8 @@
  Another way would be to use callbacks, but as the signature of the function was provided and a callback wasn't specified, I decided to go down this way.
  One of the use cases is left uncommented, but the others can be uncommented (one by one, unless multiple states should be processed at the same time)
 
+To run it:
+
+```sh
+node index.js
+```
